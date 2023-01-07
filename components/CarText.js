@@ -1,4 +1,5 @@
 import { Float, Text, MeshTransmissionMaterial } from "@react-three/drei";
+import { DoubleSide } from "three";
 export function CarText(props) {
 	return (
 		<>
@@ -12,14 +13,15 @@ export function CarText(props) {
 					Corvette
 					<MeshTransmissionMaterial
 						color={props.color}
-						samples={36}
+						samples={18}
 						distortion={10}
 						distortionSpeed={0.5}
 						distortionScale={2}
-						resolution={256}
+						resolution={128}
 						chromaticAberration={3}
 						temporalDistortion={0.5}
 						ior={1.5}
+						side={DoubleSide}
 					/>
 				</Text>
 			</Float>
