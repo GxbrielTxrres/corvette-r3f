@@ -11,23 +11,18 @@ import Lights from "../components/Lights";
 import { Suspense } from "react";
 import { ColorPicker } from "../components/ColorPicker";
 export default function App({ Component, pageProps }) {
-	const { viewCar } = useControls({
-		viewCar: { value: false },
-	});
-
 	return (
 		<div className={styles.webgl}>
 			<Leva />
 			<Canvas camera={{ position: [null, 3, null] }} shadows>
-				{viewCar && (
-					<OrbitControls
-						maxDistance={15}
-						minDistance={4}
-						minPolarAngle={-Math.PI / 2}
-						maxPolarAngle={Math.PI / 2}
-						makeDefault
-					/>
-				)}
+				<OrbitControls
+					maxDistance={15}
+					minDistance={4}
+					minPolarAngle={-Math.PI / 2}
+					maxPolarAngle={Math.PI / 2}
+					makeDefault
+				/>
+
 				<Stage
 					shadows="StageShadows"
 					adjustCamera={false}
@@ -37,7 +32,7 @@ export default function App({ Component, pageProps }) {
 				>
 					<Reflector />
 					<Suspense fallback={null}>
-						<ColorPicker viewCar={viewCar} />
+						<ColorPicker />
 					</Suspense>
 				</Stage>
 				<Lights />
