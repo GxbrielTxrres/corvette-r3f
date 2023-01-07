@@ -2,10 +2,8 @@ import "../styles/globals.css";
 import styles from "../styles/Home.module.css";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Html, Loader, Stage } from "@react-three/drei";
+import { Text, Loader, Stage } from "@react-three/drei";
 import { OrbitControls } from "@react-three/drei";
-import { Leva, useControls } from "leva";
-import { Model } from "../components/Corvette";
 import Reflector from "../components/Reflector";
 import Lights from "../components/Lights";
 import { Suspense } from "react";
@@ -31,7 +29,20 @@ export default function App({ Component, pageProps }) {
 					environment="warehouse"
 				>
 					<Reflector />
-					<Suspense fallback={null}>
+					<Suspense
+						fallback={
+							<Text
+								rotation-y={Math.PI / 2}
+								font="/HussarBoldWeb-bf92.woff"
+								fontSize={4}
+								color="#787878"
+								fillOpacity={0.5}
+								strokeOpacity={0.5}
+							>
+								Corvette
+							</Text>
+						}
+					>
 						<ColorPicker />
 					</Suspense>
 				</Stage>

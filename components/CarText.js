@@ -1,48 +1,28 @@
-import { Float, Text } from "@react-three/drei";
-import { useState } from "react";
-export function CarText() {
-	const [float, setFloat] = useState(false);
+import { Float, Text, MeshTransmissionMaterial } from "@react-three/drei";
+export function CarText(props) {
 	return (
 		<>
-			{float === true ? (
-				<Float speed={2} rotationIntensity={0.5} floatIntensity={0.8}>
-					<Text
-						onPointerOver={() => {
-							setFloat(true);
-						}}
-						onPointerOut={() => {
-							setFloat(false);
-						}}
-						position={[-2.5, 3, 2]}
-						rotation-y={Math.PI / 2}
-						font="/HussarBoldWeb-bf92.woff"
-						fontSize={4}
-						color="#787878"
-						fillOpacity={0.5}
-						strokeOpacity={0.5}
-					>
-						Corvette
-					</Text>
-				</Float>
-			) : (
+			<Float speed={2} rotationIntensity={0.5} floatIntensity={0.8}>
 				<Text
-					onPointerOver={() => {
-						setFloat(true);
-					}}
-					onPointerOut={() => {
-						setFloat(false);
-					}}
 					position={[-2.5, 3, 2]}
 					rotation-y={Math.PI / 2}
 					font="/HussarBoldWeb-bf92.woff"
 					fontSize={4}
-					color="#787878"
-					fillOpacity={0.5}
-					strokeOpacity={0.5}
 				>
 					Corvette
+					<MeshTransmissionMaterial
+						color={props.color}
+						samples={36}
+						distortion={10}
+						distortionSpeed={0.5}
+						distortionScale={2}
+						resolution={256}
+						chromaticAberration={3}
+						temporalDistortion={0.5}
+						ior={1.5}
+					/>
 				</Text>
-			)}
+			</Float>
 		</>
 	);
 }

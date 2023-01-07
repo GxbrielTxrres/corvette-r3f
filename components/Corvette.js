@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
-import { CarText } from "./CarText";
 import { useControls } from "leva";
 export function Model(props) {
 	const { nodes, materials } = useGLTF(
@@ -8,7 +7,6 @@ export function Model(props) {
 	);
 	return (
 		<>
-			<CarText />
 			<group {...props} dispose={null}>
 				<group rotation={[-Math.PI / 2, 0, 0]}>
 					<group rotation={[Math.PI / 2, 0, 0]}>

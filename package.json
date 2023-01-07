@@ -11,7 +11,7 @@
   "dependencies": {
     "@next/font": "13.1.1",
     "@react-spring/web": "^9.6.1",
-    "@react-three/drei": "^9.50.3",
+    "@react-three/drei": "^9.51.13",
     "@react-three/fiber": "^8.9.2",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",

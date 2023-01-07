@@ -1,13 +1,15 @@
 import { Html } from "@react-three/drei";
 import { useState } from "react";
 import { Model } from "./Corvette";
+import { CarText } from "./CarText";
 export function ColorPicker() {
 	const [occluded, occlude] = useState();
 	const [color, setColor] = useState("#000000");
 
 	return (
 		<>
-			<Model color={color} color2="#000000" />
+			<CarText color={color} />
+			<Model color={color} />
 			<Html // 3D-transform contents
 				transform
 				// // Hide contents "behind" other meshes
@@ -20,7 +22,7 @@ export function ColorPicker() {
 					opacity: occluded ? 0 : 1,
 					transform: `scale(${occluded ? 0.25 : 1})`,
 				}}
-				position={[3, 1, -3]}
+				position={[3, 3, 0]}
 				rotation-y={Math.PI / 4}
 			>
 				<label
