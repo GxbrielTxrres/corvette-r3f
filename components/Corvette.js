@@ -3,16 +3,6 @@ import { useGLTF } from "@react-three/drei";
 import { CarText } from "./CarText";
 import { useControls } from "leva";
 export function Model(props) {
-	const { carColor, rimColor, tireColor, windowTint, tailPipes, trimColor } =
-		useControls("Corvette", {
-			carColor: "#000000",
-			trimColor: "#000000",
-			rimColor: "#000000",
-			tireColor: "#000000",
-			windowTint: "#000000",
-			tailPipes: "#000000",
-		});
-
 	const { nodes, materials } = useGLTF(
 		"/models/corvette/corvette_stingray.glb",
 	);
@@ -79,7 +69,6 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_13.geometry}
 									material={materials.Border}
-									material-color={trimColor}
 								/>
 							</group>
 							<group
@@ -114,7 +103,6 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_19.geometry}
 									material={materials.TintedGlass}
-									material-color={windowTint}
 								/>
 							</group>
 							<group
@@ -182,7 +170,6 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_31.geometry}
 									material={materials.RoughMirror}
-									material-color={tailPipes}
 								/>
 							</group>
 							<group
@@ -271,7 +258,6 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_47.geometry}
 									material={materials.Light}
-									material-color={carColor}
 								/>
 							</group>
 							<group
@@ -1094,7 +1080,6 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_196.geometry}
 									material={materials.material_14}
-									material-color={rimColor}
 								/>
 								<mesh
 									castShadow
@@ -1108,7 +1093,6 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_198.geometry}
 									material={materials.Tire}
-									material-color={tireColor}
 								/>
 							</group>
 						</group>

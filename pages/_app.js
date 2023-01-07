@@ -13,11 +13,11 @@ import { ColorPicker } from "../components/ColorPicker";
 export default function App({ Component, pageProps }) {
 	return (
 		<div className={styles.webgl}>
-			<Leva />
-			<Canvas camera={{ position: [null, 3, null] }} shadows>
+			<Canvas camera={{ position: [3, 3, 18] }} shadows>
 				<OrbitControls
-					maxDistance={15}
-					minDistance={4}
+					target={[-2, 2, 1]}
+					maxDistance={20}
+					minDistance={8}
 					minPolarAngle={-Math.PI / 2}
 					maxPolarAngle={Math.PI / 2}
 					makeDefault

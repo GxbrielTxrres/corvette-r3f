@@ -1,10 +1,10 @@
 import { Html } from "@react-three/drei";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Model } from "./Corvette";
-export function ColorPicker(props) {
+export function ColorPicker() {
 	const [occluded, occlude] = useState();
 	const [color, setColor] = useState("#000000");
-	const ref = useRef();
+
 	return (
 		<>
 			<Model color={color} color2="#000000" />
@@ -32,6 +32,7 @@ export function ColorPicker(props) {
 						color: "white",
 						backgroundColor: "#ff0000",
 						pointer: "finger",
+						color: "#ff0000",
 					}}
 					onClick={() => {
 						setColor("#ff0000");
@@ -41,6 +42,7 @@ export function ColorPicker(props) {
 				</div>
 				<div
 					style={{
+						marginLeft: ".25rem",
 						borderRadius: "50%",
 						height: "2rem",
 						width: "2rem",
@@ -48,6 +50,7 @@ export function ColorPicker(props) {
 						color: "white",
 						backgroundColor: "#0000ff",
 						pointer: "finger",
+						color: "#0000ff",
 					}}
 					onClick={() => {
 						setColor("#0000ff");
@@ -57,11 +60,12 @@ export function ColorPicker(props) {
 				</div>
 				<div
 					style={{
+						marginLeft: ".25rem",
 						borderRadius: "50%",
 						height: "2rem",
 						width: "2rem",
 						display: "inline",
-						color: "white",
+						color: "#ffff00",
 						backgroundColor: "#ffff00",
 						pointer: "finger",
 					}}
