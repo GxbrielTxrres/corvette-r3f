@@ -1,25 +1,25 @@
-import React, { useRef } from "react";
-import { useGLTF, Float, Text } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import React, { useRef, useState } from "react";
+import { useGLTF } from "@react-three/drei";
+import { CarText } from "./CarText";
+import { useControls } from "leva";
 export function Model(props) {
-	const model = useRef();
-	const text = useRef();
-	useFrame((state) => {
-		if (props.viewCar === false) {
-			const elapsedTime = state.clock.elapsedTime;
-			state.camera.lookAt(0, 0, 0);
-			// text.current.rotation.y += 0.001;
-			state.camera.position.x = (0.2 / Math.sin(elapsedTime * 0.1)) * 0.7;
-			state.camera.position.z = Math.cos(elapsedTime * 0.1) * 9;
-		}
-	});
+	const { carColor, rimColor, tireColor, windowTint, tailPipes, trimColor } =
+		useControls("Corvette", {
+			carColor: "#000000",
+			trimColor: "#000000",
+			rimColor: "#000000",
+			tireColor: "#000000",
+			windowTint: "#000000",
+			tailPipes: "#000000",
+		});
 
 	const { nodes, materials } = useGLTF(
 		"/models/corvette/corvette_stingray.glb",
 	);
 	return (
 		<>
-			<group ref={model} {...props} dispose={null}>
+			<CarText />
+			<group {...props} dispose={null}>
 				<group rotation={[-Math.PI / 2, 0, 0]}>
 					<group rotation={[Math.PI / 2, 0, 0]}>
 						<group
@@ -36,7 +36,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_6.geometry}
 									material={materials.material}
-									material-color={props.customColors.carColor}
+									material-color={props.color}
 								/>
 							</group>
 							<group
@@ -79,9 +79,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_13.geometry}
 									material={materials.Border}
-									material-color={
-										props.customColors.trimColor
-									}
+									material-color={trimColor}
 								/>
 							</group>
 							<group
@@ -116,9 +114,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_19.geometry}
 									material={materials.TintedGlass}
-									material-color={
-										props.customColors.windowTint
-									}
+									material-color={windowTint}
 								/>
 							</group>
 							<group
@@ -186,9 +182,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_31.geometry}
 									material={materials.RoughMirror}
-									material-color={
-										props.customColors.tailPipes
-									}
+									material-color={tailPipes}
 								/>
 							</group>
 							<group
@@ -277,7 +271,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_47.geometry}
 									material={materials.Light}
-									material-color={props.customColors.carColor}
+									material-color={carColor}
 								/>
 							</group>
 							<group
@@ -1100,7 +1094,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_196.geometry}
 									material={materials.material_14}
-									material-color={props.customColors.rimColor}
+									material-color={rimColor}
 								/>
 								<mesh
 									castShadow
@@ -1114,9 +1108,7 @@ export function Model(props) {
 									receiveShadow
 									geometry={nodes.Object_198.geometry}
 									material={materials.Tire}
-									material-color={
-										props.customColors.tireColor
-									}
+									material-color={tireColor}
 								/>
 							</group>
 						</group>

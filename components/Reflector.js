@@ -1,5 +1,4 @@
 import { MeshReflectorMaterial } from "@react-three/drei";
-import { useControls } from "leva";
 
 export default function Reflector() {
 	return (
