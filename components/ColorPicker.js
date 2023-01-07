@@ -20,61 +20,23 @@ export function ColorPicker() {
 					opacity: occluded ? 0 : 1,
 					transform: `scale(${occluded ? 0.25 : 1})`,
 				}}
-				position={[3, 3, 0]}
+				position={[3, 1, -3]}
 				rotation-y={Math.PI / 4}
 			>
-				<div
-					style={{
-						borderRadius: "50%",
-						height: "2rem",
-						width: "2rem",
-						display: "inline",
-						color: "white",
-						backgroundColor: "#ff0000",
-						pointer: "finger",
-						color: "#ff0000",
-					}}
-					onClick={() => {
-						setColor("#ff0000");
-					}}
+				<label
+					style={{ color: "white", marginRight: ".5rem" }}
+					htmlFor="color"
 				>
-					SS
-				</div>
-				<div
-					style={{
-						marginLeft: ".25rem",
-						borderRadius: "50%",
-						height: "2rem",
-						width: "2rem",
-						display: "inline",
-						color: "white",
-						backgroundColor: "#0000ff",
-						pointer: "finger",
-						color: "#0000ff",
+					Color:
+				</label>
+				<input
+					type="color"
+					id="color"
+					name="color"
+					onChange={(e) => {
+						setColor(e.target.value);
 					}}
-					onClick={() => {
-						setColor("#0000ff");
-					}}
-				>
-					SS
-				</div>
-				<div
-					style={{
-						marginLeft: ".25rem",
-						borderRadius: "50%",
-						height: "2rem",
-						width: "2rem",
-						display: "inline",
-						color: "#ffff00",
-						backgroundColor: "#ffff00",
-						pointer: "finger",
-					}}
-					onClick={() => {
-						setColor("#ffff00");
-					}}
-				>
-					SS
-				</div>
+				/>
 			</Html>
 		</>
 	);
