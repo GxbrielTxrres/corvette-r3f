@@ -2,7 +2,6 @@ import { Html } from "@react-three/drei";
 import { useRef, useState } from "react";
 import { Model } from "./Corvette";
 import { CarText } from "./CarText";
-import { useControls } from "leva";
 export function ColorPicker() {
 	const [occluded, occlude] = useState();
 	const [color, setColor] = useState("#000000");
@@ -12,8 +11,9 @@ export function ColorPicker() {
 	return (
 		<>
 			<CarText color={color} />
-			<Model hoverToggle={ref} color={color} />
-			<mesh ref={ref} position={[0, 2, 0]}>
+			<Model color={color} />
+
+			<mesh ref={ref} position={[-2.5, 5.4, 3]} rotation-y={Math.PI / 2}>
 				<Html // 3D-transform contents
 					transform
 					// // Hide contents "behind" other meshes
@@ -26,22 +26,49 @@ export function ColorPicker() {
 						opacity: occluded ? 0 : 1,
 						transform: `scale(${occluded ? 0.25 : 1})`,
 					}}
-					rotation-y={Math.PI / 4}
 				>
 					<label
 						style={{ color: "white", marginRight: ".5rem" }}
 						htmlFor="color"
 					>
-						Color:
+						Choose a color:
 					</label>
-					<input
-						type="color"
-						id="color"
-						name="color"
-						onChange={(e) => {
-							setColor(e.target.value);
+					<button
+						onClick={() => {
+							setColor("#000000");
 						}}
-					/>
+						style={{ backgroundColor: "black" }}
+					></button>
+					<button
+						onClick={() => {
+							setColor("#ffffff");
+						}}
+						style={{ backgroundColor: "white" }}
+					></button>
+					<button
+						onClick={() => {
+							setColor("#ff0000");
+						}}
+						style={{ backgroundColor: "red" }}
+					></button>
+					<button
+						onClick={() => {
+							setColor("#09dde8");
+						}}
+						style={{ backgroundColor: "#09dde8" }}
+					></button>
+					<button
+						onClick={() => {
+							setColor("#fff700");
+						}}
+						style={{ backgroundColor: "##fff700" }}
+					></button>
+					<button
+						onClick={() => {
+							setColor("#ffa200");
+						}}
+						style={{ backgroundColor: "#ffa200" }}
+					></button>
 				</Html>
 			</mesh>
 		</>

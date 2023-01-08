@@ -21,7 +21,7 @@ export default function Instructions() {
 		if (forward === false) {
 			gsap.to(glass.current.scale, { x: 0, y: 0, z: 0, duration: 2 });
 			gsap.to(glass.current.material, { opacity: 0, duration: 2 });
-			gsap.to(camera.position, { x: 5, y: -6.65, z: 21, duration: 3 });
+			gsap.to(camera.position, { x: 8, y: -3, z: 19, duration: 3 });
 		} else {
 			gsap.fromTo(
 				glass.current.material,
@@ -52,6 +52,8 @@ export default function Instructions() {
 				target={[-2, -5, 2.3]}
 				maxDistance={22}
 				minDistance={8}
+				maxPolarAngle={Math.PI / 2}
+				minPolarAngle={-Math.PI / 2}
 				makeDefault
 				onEnd={() => {
 					console.log(controls.target, camera.position);
@@ -62,7 +64,7 @@ export default function Instructions() {
 				position={[0, 15, 0]}
 				rotation={[-Math.PI / 2, 0, 0]}
 			>
-				<planeGeometry args={[20, 20, 100, 100]} />
+				<planeGeometry args={[40, 40, 100, 100]} />
 				<MeshTransmissionMaterial
 					transparent={true}
 					color="#ffffff"

@@ -1,38 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
-import gsap from "gsap";
 export function Model(props) {
-	const [click, setClick] = useState(false);
-
-	useEffect(() => {
-		if (click) {
-			gsap.to(props.hoverToggle.current.position, {
-				y: 5,
-				duration: 0.2,
-			});
-		} else {
-			gsap.to(props.hoverToggle.current.position, {
-				y: 2,
-				duration: 0.2,
-			});
-		}
-	});
-
 	const { nodes, materials } = useGLTF(
 		"/models/corvette/corvette_stingray.glb",
 	);
 	return (
 		<>
-			<group
-				// onPointerOver={hover}
-				// onPointerOut={hoverOut}
-
-				onClick={() => {
-					setClick(!click);
-				}}
-				{...props}
-				dispose={null}
-			>
+			<group {...props} dispose={null}>
 				<group rotation={[-Math.PI / 2, 0, 0]}>
 					<group rotation={[Math.PI / 2, 0, 0]}>
 						<group

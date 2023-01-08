@@ -13,7 +13,7 @@ export function CarText(props) {
 					Corvette
 					<MeshTransmissionMaterial
 						color={props.color}
-						samples={18}
+						samples={10}
 						distortion={10}
 						distortionSpeed={0.5}
 						distortionScale={2}
