@@ -26,16 +26,17 @@ export default function Instructions() {
 			gsap.fromTo(
 				glass.current.material,
 				{ distortion: 1 },
-				{ distortion: 20, duration: 10, yoyo: true, repeat: -1 },
+				{ distortion: 100, duration: 10, yoyo: true, repeat: -1 },
 			);
+
 			gsap.fromTo(
 				glass.current.material.color,
-				{ ease: "linear", r: 0.75, g: 0.25, b: 0 },
+				{ ease: "linear", r: 0.25, g: 0.25, b: 0 },
 				{
 					ease: "linear",
 					r: 1,
-					g: 0,
-					b: 0,
+					g: 0.5,
+					b: 0.5,
 					duration: 5,
 					yoyo: true,
 					repeat: -1,
@@ -68,9 +69,9 @@ export default function Instructions() {
 					samples={4}
 					distortion={1}
 					distortionSpeed={0.2}
-					distortionScale={1}
+					distortionScale={0.5}
 					resolution={128}
-					chromaticAberration={3}
+					chromaticAberration={1}
 					temporalDistortion={1}
 					ior={1.5}
 					side={DoubleSide}
