@@ -1,58 +1,113 @@
-import { MeshTransmissionMaterial } from "@react-three/drei";
-import { Html } from "@react-three/drei";
-import { useState } from "react";
+import {
+	Float,
+	MeshTransmissionMaterial,
+	MeshWobbleMaterial,
+	OrbitControls,
+} from "@react-three/drei";
+import { Text } from "@react-three/drei";
+import { useEffect, useState } from "react";
 import { DoubleSide } from "three";
 import { useRef } from "react";
-export default function Instructions(props) {
-	const [occluded, occlude] = useState();
-	const ref = useRef();
+import gsap from "gsap";
+import { useThree } from "@react-three/fiber";
+
+export default function Instructions() {
+	const [forward, setForward] = useState(true);
+	const glass = useRef();
+
+	const { camera, controls } = useThree();
+
+	useEffect(() => {
+		if (forward === false) {
+			gsap.to(glass.current.scale, { x: 0, y: 0, z: 0, duration: 2 });
+			gsap.to(glass.current.material, { opacity: 0, duration: 2 });
+			gsap.to(camera.position, { x: 5, y: -6.65, z: 21, duration: 3 });
+		} else {
+			gsap.fromTo(
+				glass.current.material,
+				{ distortion: 1 },
+				{ distortion: 20, duration: 10, yoyo: true, repeat: -1 },
+			);
+			gsap.fromTo(
+				glass.current.material.color,
+				{ ease: "linear", r: 0.75, g: 0.25, b: 0 },
+				{
+					ease: "linear",
+					r: 1,
+					g: 0,
+					b: 0,
+					duration: 5,
+					yoyo: true,
+					repeat: -1,
+				},
+			);
+			gsap.to(glass.current.material, { opacity: 1 });
+		}
+	});
 
 	return (
 		<>
-			<mesh position={[-1, 7.5, -10]}>
-				<planeGeometry args={[20, 15, 100, 100]} />
+			<OrbitControls
+				target={[-2, -5, 2.3]}
+				maxDistance={22}
+				minDistance={8}
+				makeDefault
+				onEnd={() => {
+					console.log(controls.target, camera.position);
+				}}
+			/>
+			<mesh
+				ref={glass}
+				position={[0, 15, 0]}
+				rotation={[-Math.PI / 2, 0, 0]}
+			>
+				<planeGeometry args={[20, 20, 100, 100]} />
 				<MeshTransmissionMaterial
+					transparent={true}
 					color="#ffffff"
-					samples={9}
-					distortion={10}
-					distortionSpeed={0.5}
-					distortionScale={2}
+					samples={4}
+					distortion={1}
+					distortionSpeed={0.2}
+					distortionScale={1}
 					resolution={128}
 					chromaticAberration={3}
-					temporalDistortion={0.5}
+					temporalDistortion={1}
 					ior={1.5}
 					side={DoubleSide}
 				/>
-				<Html
-					ref={ref}
-					position-z={0.1}
-					transform
-					occlude="blending"
-					onOcclude={occlude}
-					// We just interpolate the visible state into css opacity and transforms
-					style={{
-						transition: "all 0.2s",
-						opacity: occluded ? 0 : 1,
-						transform: `scale(${occluded ? 0.25 : 1})`,
+
+				<Text
+					color="white"
+					font="/HussarBoldWeb-bf92.woff"
+					fontSize={0.4}
+					fillOpacity={forward ? 1 : 0}
+					onPointerDown={() => {
+						setForward(!forward);
 					}}
+					position={[-1.25, -2, 3]}
+					rotation-z={Math.PI / 3}
+					rotation-x={Math.PI / 3}
+					rotation-y={Math.PI / 4}
 				>
-					<div
-						style={{
-							textAlign: "center",
-							fontSize: "24px",
-							color: "white",
-							transition: "all 0.2s",
-							opacity: props.clicked ? 0 : 1,
-						}}
-					>
-						Click/Tap the car to change the color.
-					</div>
-					<iframe
-						width={750}
-						height={500}
-						src="https://threejs.org/"
-					/>
-				</Html>
+					Customize Car
+					<MeshWobbleMaterial factor={0.5} speed={0.75} />
+				</Text>
+
+				<Text
+					color="white"
+					font="/HussarBoldWeb-bf92.woff"
+					fontSize={0.25}
+					fillOpacity={forward ? 1 : 0}
+					onPointerDown={() => {
+						setForward(!forward);
+					}}
+					position={[3, -0.2, 1.5]}
+					rotation-z={Math.PI / 1.5}
+					rotation-x={Math.PI / 4}
+				>
+					Customize Background
+					<MeshWobbleMaterial factor={0.36} speed={0.8} />
+				</Text>
 			</mesh>
 		</>
 	);

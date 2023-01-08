@@ -1,9 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import gsap from "gsap";
-import Instructions from "../components/Instructions";
 export function Model(props) {
-	// console.log(props.hoverToggle.current);
 	const [click, setClick] = useState(false);
 
 	useEffect(() => {
@@ -25,7 +23,6 @@ export function Model(props) {
 	);
 	return (
 		<>
-			<Instructions clicked={click} />
 			<group
 				// onPointerOver={hover}
 				// onPointerOut={hoverOut}

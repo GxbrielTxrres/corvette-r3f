@@ -1,26 +1,16 @@
 import "../styles/globals.css";
 import styles from "../styles/Home.module.css";
-import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Text, Loader, Stage } from "@react-three/drei";
-import { OrbitControls } from "@react-three/drei";
 import Reflector from "../components/Reflector";
-import { Cube } from "../components/Cubes";
 import { Suspense } from "react";
 import { ColorPicker } from "../components/ColorPicker";
+import Instructions from "../components/Instructions";
 export default function App({ Component, pageProps }) {
 	return (
 		<div className={styles.webgl}>
-			<Canvas camera={{ position: [3, 3, 18] }} shadows>
-				<Cube />
-				<OrbitControls
-					target={[-2, 2, 1]}
-					maxDistance={20}
-					minDistance={8}
-					minPolarAngle={-Math.PI / 2}
-					maxPolarAngle={Math.PI / 2}
-					makeDefault
-				/>
+			<Canvas camera={{ position: [2.21, 13.15, 0.85] }} shadows>
+				<color attach="background" args={["#0f0f0f"]} />
 
 				<Stage
 					shadows="StageShadows"
@@ -46,6 +36,7 @@ export default function App({ Component, pageProps }) {
 					>
 						<ColorPicker />
 					</Suspense>
+					<Instructions />
 				</Stage>
 			</Canvas>
 			<Loader />
