@@ -5,7 +5,7 @@ export function CarText(props) {
 		<>
 			<Float speed={2} rotationIntensity={0.5} floatIntensity={0.8}>
 				<Text
-					position={[-2.5, 3, 2]}
+					position={[-2.5, 2.5, 2]}
 					rotation-y={Math.PI / 2}
 					font="/HussarBoldWeb-bf92.woff"
 					fontSize={4}

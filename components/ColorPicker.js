@@ -13,7 +13,43 @@ export function ColorPicker() {
 			<CarText color={color} />
 			<Model color={color} />
 
-			<mesh ref={ref} position={[-2.5, 5.4, 3]} rotation-y={Math.PI / 2}>
+			<mesh
+				ref={ref}
+				position={[-2.5, 5.7, 2.5]}
+				rotation-y={Math.PI / 2}
+			>
+				<Html // 3D-transform contents
+					transform
+					// // Hide contents "behind" other meshes
+
+					// We just interpolate the visible state into css opacity and transforms
+					style={{
+						transition: "all 0.2s",
+						opacity: occluded ? 0 : 1,
+						transform: `scale(${occluded ? 0.25 : 1})`,
+					}}
+				>
+					<div
+						style={{
+							backgroundColor: "#ffffff20",
+							boxShadow: "0, 4px, 30px, #00000010",
+							backdropFilter: "5.2px",
+							border: "1px solid #ffffff30",
+							height: "5rem",
+							width: "24rem",
+							borderRadius: "15px",
+							opacity: ".5",
+							pointerEvents: "none",
+						}}
+					></div>
+				</Html>
+			</mesh>
+
+			<mesh
+				ref={ref}
+				position={[-2.4, 5.7, 2.15]}
+				rotation-y={Math.PI / 2}
+			>
 				<Html // 3D-transform contents
 					transform
 					// // Hide contents "behind" other meshes
@@ -28,7 +64,13 @@ export function ColorPicker() {
 					}}
 				>
 					<label
-						style={{ color: "white", marginRight: ".5rem" }}
+						style={{
+							color: "white",
+							marginRight: ".5rem",
+							display: "flex",
+							justifyContent: "center",
+							paddingBottom: " 10px",
+						}}
 						htmlFor="color"
 					>
 						Choose a color:

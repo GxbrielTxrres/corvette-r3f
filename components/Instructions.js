@@ -1,8 +1,8 @@
 import {
-	Float,
 	MeshTransmissionMaterial,
 	MeshWobbleMaterial,
 	OrbitControls,
+	SpotLight,
 } from "@react-three/drei";
 import { Text } from "@react-three/drei";
 import { useEffect, useState } from "react";
@@ -10,12 +10,54 @@ import { DoubleSide } from "three";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useThree } from "@react-three/fiber";
+import { useControls } from "leva";
 
 export default function Instructions() {
 	const [forward, setForward] = useState(true);
 	const glass = useRef();
 
 	const { camera, controls } = useThree();
+
+	// const {
+	// 	color,
+	// 	samples,
+	// 	distortion,
+	// 	distortionScale,
+	// 	distortionSpeed,
+	// 	ior,
+	// 	sheen,
+	// 	specularIntensity,
+	// 	specularColor,
+	// 	thickness,
+	// 	transmission,
+	// 	attenuationColor,
+	// 	sheenRoughness,
+	// 	roughness,
+	// 	metalness,
+	// 	resolution,
+	// 	reflectivity,
+	// 	clearcoat,
+	// 	clearcoatRoughness,
+	// 	chromaticAberration,
+	// 	sheenColor,
+	// 	temporalDistortion,
+	// } = useControls({
+	// 	position: { value: { x: 0, y: 0, z: 0 }, step: 0.1 },
+	// 	color: "#ffffff",
+	// 	samples: 4,
+	// 	distortionSpeed: 0.2,
+	// 	ior: { value: 1.5, step: 0.1, max: 5 },
+	// 	temporalDistortion: { value: 1, min: 0, max: 10, step: 0.01 },
+	// 	sheen: { value: 1, min: 0, max: 1, step: 0.1 },
+	// 	sheenColor: "#ffffff",
+	// 	clearcoat: { value: 0, min: 0, max: 1, step: 0.1 },
+	// 	thickness: { value: 10, min: 0, max: 25, step: 0.1 },
+	// 	chromaticAberration: { value: 10, min: 0, max: 25, step: 0.1 },
+	// });
+
+	const { thickness } = useControls({
+		thickness: { value: 2.5, min: 0, max: 25, step: 0.1 },
+	});
 
 	useEffect(() => {
 		if (forward === false) {
@@ -48,6 +90,7 @@ export default function Instructions() {
 
 	return (
 		<>
+			<SpotLight color="yellow" position={[5, 18, 0]} />
 			<OrbitControls
 				target={[-2, -5, 2.3]}
 				maxDistance={22}
@@ -77,6 +120,29 @@ export default function Instructions() {
 					temporalDistortion={1}
 					ior={1.5}
 					side={DoubleSide}
+					// color={color}
+					// samples={samples}
+					// distortion={distortion}
+					// distortionSpeed={distortionSpeed}
+					// distortionScale={distortionScale}
+					// resolution={resolution}
+					// reflectivity={reflectivity}
+					// ior={ior}
+					// clearcoat={clearcoat}
+					// clearcoatRoughness={clearcoatRoughness}
+					// chromaticAberration={chromaticAberration}
+					// roughness={roughness}
+					// metalness={metalness}
+					// sheen={sheen}
+					// specularIntensity={specularIntensity}
+					// specularColor={specularColor}
+					thickness={thickness}
+					// transmission={transmission}
+					// sheenColor={sheenColor}
+					// sheenRoughness={sheenRoughness}
+					// attenuationColor={attenuationColor}
+					// temporalDistortion={temporalDistortion}
+					// side={DoubleSide}
 				/>
 
 				<Text
