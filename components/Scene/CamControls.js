@@ -14,8 +14,12 @@ export default function CamControls({
 		<CameraControls
 			position={[10.5, 0, 0]}
 			makeDefault
-			minPolarAngle={0}
-			maxPolarAngle={Math.PI / 2}
+			minPolarAngle={Math.PI / 2.5}
+			maxPolarAngle={Math.PI / 2.1}
+			minAzimuthAngle={0.9}
+			maxAzimuthAngle={2.2}
+			minDistance={2}
+			maxDistance={5}
 		/>
 	);
 }
