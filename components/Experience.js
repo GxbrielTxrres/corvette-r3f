@@ -1,11 +1,4 @@
-import {
-	Box,
-	Float,
-	Sky,
-	Stars,
-	Text,
-	useVideoTexture,
-} from "@react-three/drei";
+import { Stars, Text, useVideoTexture } from "@react-three/drei";
 
 import Background from "./Scene/Background";
 import CamControls from "./Scene/CamControls";
@@ -14,19 +7,13 @@ import { Perf } from "r3f-perf";
 
 import Ocean from "./SceneChildren/Water";
 import Effects from "./Scene/Effects";
-import { Saturn } from "./Models/Saturn";
 import { Room } from "./Models/Room";
 import Sunset from "./SceneChildren/Sunset";
-import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 export default function Experience() {
-	const POSITIONSCALE = 1.72;
-	const texture = useVideoTexture("./lightning.mp4");
-	const { width, height } = useThree((state) => state.viewport);
 	const godRay = useRef();
 	return (
 		<>
-			<Perf />
 			<Background preset="night" color={0xaaaaaa} />
 			<Effects sun={godRay} />
 			<Room />
