@@ -6,14 +6,7 @@ extend(geometry);
 
 const Card = forwardRef(
 	(
-		{
-			position,
-			color,
-			children,
-			rotationY,
-			goldenRatio = 1.61803398875,
-			preset,
-		},
+		{ color, children, goldenRatio = 1.61803398875, preset, ...otherProps },
 		ref,
 	) => {
 		const portal = useRef();
@@ -26,8 +19,7 @@ const Card = forwardRef(
 					onClick={() =>
 						window.open("https://twitter.com/DeveloperGT")
 					}
-					rotation-y={rotationY}
-					position={position}
+					{...otherProps}
 				>
 					<roundedPlaneGeometry
 						args={[2.2, goldenRatio * 2.5, 0.05]}
@@ -35,7 +27,10 @@ const Card = forwardRef(
 
 					<MeshPortalMaterial ref={portal}>
 						<color attach="background" args={[color]} />
-						<Environment preset={preset} />
+						<Environment
+							background
+							files={"./hdrs/moonless_golf_2k.hdr"}
+						/>
 						{children}
 					</MeshPortalMaterial>
 				</mesh>

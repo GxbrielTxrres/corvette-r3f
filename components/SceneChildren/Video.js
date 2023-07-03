@@ -1,18 +1,26 @@
 import { useTexture, useVideoTexture } from "@react-three/drei";
 import { forwardRef } from "react";
+import { DoubleSide } from "three";
+import { Model } from "../Models/Humans";
+import Youtube from "./Youtube";
 
 const Video = forwardRef(function Sun(props, forwardRef) {
-	const texture = useVideoTexture("./both.mp4");
+	const texture = useVideoTexture("./sunsett.mp4");
 	return (
 		<mesh
-			position-x={0.1}
-			position-y={0.65}
-			scale={[8.5, 4.2, 1]}
+			position-x={-4}
+			position-y={0.7}
 			ref={forwardRef}
 			rotation-y={Math.PI / 2}
 		>
-			<planeGeometry />
-			<meshBasicMaterial map={texture} color={"#ffffff"} />
+			<mesh scale={[8, 4, 0.5]}>
+				<planeGeometry />
+				<meshBasicMaterial
+					map={texture}
+					color={"#ffffff"}
+					toneMapped={false}
+				/>
+			</mesh>
 		</mesh>
 	);
 });

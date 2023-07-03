@@ -26,7 +26,6 @@ export function Saturn(props) {
 				backsideResolution={128}
 				backsideThickness={6}
 				envMapIntensity={0.4}
-				roughness={0.2}
 				samples={2}
 				distortion={3}
 				temporalDistortion={0.1}

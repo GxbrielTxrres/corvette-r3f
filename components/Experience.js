@@ -10,10 +10,12 @@ import Effects from "./Scene/Effects";
 import { Room } from "./Models/Room";
 import Sunset from "./SceneChildren/Sunset";
 import { useRef } from "react";
+import { Model } from "./Models/Humans";
 export default function Experience() {
 	const godRay = useRef();
 	return (
 		<>
+			<Perf />
 			<Background preset="night" color={0xaaaaaa} />
 			<Effects sun={godRay} />
 			<Room />
@@ -25,14 +27,7 @@ export default function Experience() {
 					color="black"
 				>
 					<Stars fade speed={4} />
-					<group position-y={0.5}>
-						<Text position-z={-0.2} scale={0.2}>
-							Twitter
-						</Text>
-						<Text position-z={-0.2} position-y={-0.4} scale={0.2}>
-							@GTDevelops
-						</Text>
-					</group>
+					<group position-y={0.5}></group>
 				</Card>
 				{/* <Card
 					position={[-POSITIONSCALE * 2, 0.7, -1]}
@@ -51,9 +46,7 @@ export default function Experience() {
 					<Sunset opposite={true} />
 					<Ocean />
 				</Card> */}
-				<Text position={[0, -0.5, 2.9]} scale={0.3}>
-					Swipe To Look Around
-				</Text>
+
 				<Card
 					rotationY={-Math.PI / 2}
 					position={[4.3, 0.7, -0.1]}
@@ -63,11 +56,16 @@ export default function Experience() {
 					<Sunset opposite={true} />
 					<Ocean />
 					<group position-y={0.5}>
-						<Text position-z={-0.2} scale={0.2}>
-							Click Me
+						<Text position-z={-0.2} position-x={-0.2} scale={0.2}>
+							Twitter
 						</Text>
-						<Text position-z={-0.2} position-y={-0.4} scale={0.2}>
-							(Twitter Link)
+						<Text
+							position-z={-0.2}
+							position-x={-0.2}
+							position-y={-0.4}
+							scale={0.2}
+						>
+							@GTDevelops
 						</Text>
 					</group>
 				</Card>
