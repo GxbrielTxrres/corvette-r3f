@@ -7,15 +7,10 @@ import { Preload, ScrollControls } from "@react-three/drei";
 export default function App({ Component, pageProps }) {
 	return (
 		<>
-			<Canvas
-				gl={{ antialias: false }}
-				shadows
-				style={{ ...styles }}
-				camera={{ position: [3.5, -2.5, 0] }}
-			>
+			<Canvas gl={{ antialias: false }} shadows style={{ ...styles }}>
 				{/* <Experience /> */}
 
-				<ScrollControls pages={2} distance={0.5} maxSpeed={0.5}>
+				<ScrollControls pages={2} distance={1.5} maxSpeed={0.2}>
 					<Scene />
 					<Preload all />
 				</ScrollControls>

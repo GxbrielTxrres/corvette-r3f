@@ -1,6 +1,10 @@
-import { CameraControls, OrbitControls } from "@react-three/drei";
+import {
+	CameraControls,
+	OrbitControls,
+	PerspectiveCamera,
+} from "@react-three/drei";
 import { Vector3 } from "three";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 export default function CamControls({
@@ -8,11 +12,11 @@ export default function CamControls({
 	focus = new Vector3(0, 0.2, 0),
 	tl,
 }) {
-	const { camera } = useThree();
+	// const { camera } = useThree();
 	const control = useRef();
 	const { width } = useThree((state) => state.viewport);
 	useEffect(() => {
-		gsap.to(camera.position, {
+		gsap.to(control.current.object.position, {
 			x: position.x,
 			y: position.y,
 			z: position.z + 0.2,
@@ -22,6 +26,8 @@ export default function CamControls({
 	}, []);
 
 	useLayoutEffect(() => {
+		const camera = control.current.object;
+		console.log(camera);
 		if (tl) {
 			tl.to(
 				camera.position,
@@ -76,6 +82,36 @@ export default function CamControls({
 				},
 				7.5,
 			);
+
+			tl.to(
+				camera.position,
+				{
+					x: 2,
+					duration: 1.75,
+					ease: "power2.in",
+				},
+				9.5,
+			);
+
+			tl.to(
+				camera.position,
+				{
+					y: 1.1,
+					duration: 1,
+					ease: "sine.out",
+				},
+				10.25,
+			);
+
+			tl.to(
+				control.current.target,
+				{
+					y: -2,
+					duration: 1.5,
+					ease: "power2.out",
+				},
+				10.15,
+			);
 		}
 	}, [tl]);
 
@@ -106,12 +142,10 @@ export default function CamControls({
 	return (
 		<OrbitControls
 			makeDefault
-			enableZoom={false}
-			// minPolarAngle={Math.PI / 2.5}
-			// maxPolarAngle={Math.PI / 2.1}
-			// minAzimuthAngle={0.9}
-			// maxAzimuthAngle={2.2}
 			ref={control}
+			enableZoom={false}
+			enablePan={false}
+			enableRotate={false}
 		/>
 	);
 }

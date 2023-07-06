@@ -9,6 +9,7 @@ Title: PLANAR HUMAN BASE RIGS
 
 import React, { useLayoutEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export function Model(props) {
 	const { nodes, materials } = useGLTF(
@@ -18,8 +19,21 @@ export function Model(props) {
 	const ref = useRef();
 
 	useLayoutEffect(() => {
+		if (props.tl) {
+			props.tl.to(
+				ref.current.position,
+				{
+					y: 20,
+					duration: 0.01,
+				},
+				9.4998,
+			);
+		}
+
 		Object.values(materials).forEach((material) => {
 			material.envMapIntensity = 0;
+			material.transparent = true;
+			material.toneMapped = false;
 
 			if (props.tl) {
 				props.tl.to(
@@ -46,8 +60,18 @@ export function Model(props) {
 			}
 		});
 	}, [props.tl]);
+
+	useFrame(() => {
+		Object.values(materials).forEach((material) => {
+			if (props.tl._time >= 9.5) {
+				material.opacity = 0;
+			} else {
+				material.opacity = 1;
+			}
+		});
+	});
 	return (
-		<group {...props} dispose={null}>
+		<group {...props} ref={ref} dispose={null}>
 			<group rotation={[-1.57, 0, 0]}>
 				<group rotation={[Math.PI / 2, 0, 0]}>
 					<group position={[2.95, 0, 0]} scale={1.72}>

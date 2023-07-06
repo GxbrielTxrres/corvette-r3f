@@ -32,6 +32,7 @@ export function Saturn(props) {
 				iridescence={0.25}
 				ior={0.9}
 				iridescenceThicknessRange={[0, 200]}
+				fog={false}
 			/>
 		);
 	}, []);

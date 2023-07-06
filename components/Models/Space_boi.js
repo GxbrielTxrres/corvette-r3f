@@ -7,19 +7,49 @@ Source: https://sketchfab.com/3d-models/space-boi-f6a8c6a6727b4f2cb020c8b50bb2ee
 Title: space boi
 */
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
-export function SpaceBoi(props) {
+export function SpaceBoi({ tl, ...props }) {
 	const { nodes, materials } = useGLTF("/space_boi-transformed.glb");
+	const ref = useRef();
+	useEffect(() => {
+		Object.values(materials).forEach((material) => {
+			// material.transparent = true;
+			material.opacity = 0;
+		});
+
+		if (tl) {
+			tl.to(ref.current.position, { y: 0, duration: 0.01 }, 9.499);
+
+			tl.to(
+				ref.current.rotation,
+				{ y: -Math.PI / 3, duration: 2, ease: "power3.inOut" },
+				11,
+			);
+		}
+	}, [tl]);
+
+	useFrame(() => {
+		if (tl) {
+			Object.values(materials).forEach((material) => {
+				if (tl._time >= 9.5) {
+					material.opacity = 1;
+				} else {
+					material.opacity = 0;
+				}
+			});
+		}
+	});
 	return (
-		<group {...props} dispose={null}>
+		<group {...props} ref={ref} dispose={null}>
 			<group scale={0.01}>
 				<group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-					<mesh
+					{/* <mesh
 						geometry={nodes.body_Material001_0.geometry}
 						material={materials["Material.001"]}
-					/>
+					/> */}
 					<mesh
 						geometry={nodes.body_Material002_0.geometry}
 						material={materials["Material.002"]}

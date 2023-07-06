@@ -1,16 +1,39 @@
 import { Environment, MeshPortalMaterial, Text } from "@react-three/drei";
 import { extend, useFrame } from "@react-three/fiber";
 import { easing, geometry } from "maath";
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useLayoutEffect, useRef, useState } from "react";
 extend(geometry);
 
 const Card = forwardRef(
 	(
-		{ color, children, goldenRatio = 1.61803398875, preset, ...otherProps },
+		{
+			color,
+			children,
+			goldenRatio = 1.61803398875,
+			preset,
+			tl,
+			...otherProps
+		},
 		ref,
 	) => {
 		const portal = useRef();
 		const mesh = useRef();
+
+		useLayoutEffect(() => {
+			if (tl) {
+				tl.to(
+					portal.current.uniforms.blend,
+					{
+						value: 1,
+						duration: 0.1,
+						ease: "power2.inOut",
+					},
+					9.49,
+				);
+			}
+
+			console.log(portal.current);
+		}, [tl]);
 
 		return (
 			<group>
@@ -27,10 +50,7 @@ const Card = forwardRef(
 
 					<MeshPortalMaterial ref={portal}>
 						<color attach="background" args={[color]} />
-						<Environment
-							background
-							files={"./hdrs/moonless_golf_2k.hdr"}
-						/>
+						<Environment files={"./hdrs/moonless_golf_2k.hdr"} />
 						{children}
 					</MeshPortalMaterial>
 				</mesh>

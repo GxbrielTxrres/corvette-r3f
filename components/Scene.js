@@ -14,6 +14,8 @@ import { gsap } from "gsap";
 import { useFrame } from "@react-three/fiber";
 import { Butterflies } from "./Models/Butterflies";
 import { SpaceBoi } from "./Models/Space_boi";
+import SunOrStars from "./Scene/SunOrStars";
+import Sunset from "./SceneChildren/Sunset";
 
 export default function Scene() {
 	const config = {
@@ -52,10 +54,18 @@ export default function Scene() {
 			<Background color="black" />
 			<Floor />
 			<Stars />
+			<Card position-z={20} tl={tl} color="white">
+				<Sunset />
+				<SpaceBoi
+					scale={0.2}
+					position={[3, -10, -20]}
+					rotation-y={Math.PI / 2}
+					tl={tl}
+				/>
+			</Card>
 			<Float>
 				<Butterflies position={[-3.4, 0.7, 1]} scale={0.01} />
 			</Float>
-			{/* <SpaceBoi scale={0.2} /> */}
 			{/* <Card rotation-y={Math.PI / 4}></Card> */}
 			{/* <Youtube /> */}
 			<CamControls tl={tl} />
