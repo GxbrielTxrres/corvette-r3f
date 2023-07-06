@@ -10,7 +10,12 @@ export default function App({ Component, pageProps }) {
 			<Canvas gl={{ antialias: false }} shadows style={{ ...styles }}>
 				{/* <Experience /> */}
 
-				<ScrollControls pages={2} distance={1.5} maxSpeed={0.2}>
+				<ScrollControls
+					pages={2}
+					distance={2}
+					damping={0.3}
+					maxSpeed={0.4}
+				>
 					<Scene />
 					<Preload all />
 				</ScrollControls>

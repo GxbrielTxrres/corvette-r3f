@@ -47,6 +47,7 @@ export default function Scene() {
 
 	return (
 		<>
+			{/* <Perf /> */}
 			<fogExp2 attach="fog" args={["pink", 0.03]} />
 			<Model {...config.model} tl={tl} />
 			<Effects video={true} />

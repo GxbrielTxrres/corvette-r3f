@@ -5,14 +5,15 @@ import {
 } from "@react-three/drei";
 import { Vector3 } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 export default function CamControls({
 	position = new Vector3(3.52, 0.6, 0),
 	focus = new Vector3(0, 0.2, 0),
 	tl,
 }) {
-	// const { camera } = useThree();
+	const [enabled, setEnabled] = useState(true);
+	const { camera } = useThree();
 	const control = useRef();
 	const { width } = useThree((state) => state.viewport);
 	useEffect(() => {
@@ -22,31 +23,21 @@ export default function CamControls({
 			z: position.z + 0.2,
 			duration: 2.5,
 			ease: "sine.out",
+		}).eventCallback("onComplete", () => {
+			setEnabled(false);
 		});
 	}, []);
 
 	useLayoutEffect(() => {
-		const camera = control.current.object;
-		console.log(camera);
 		if (tl) {
 			tl.to(
 				camera.position,
 				{
-					y: 4,
-					duration: 3,
-					ease: "sine.out",
-				},
-				0.5,
-			);
-
-			tl.to(
-				camera.position,
-				{
-					x: -2,
+					x: -1,
 					duration: 3,
 					ease: "power3.in",
 				},
-				1.5,
+				0.5,
 			);
 
 			tl.to(
@@ -60,10 +51,9 @@ export default function CamControls({
 			);
 
 			tl.to(
-				control.current.target,
+				camera.rotation,
 				{
-					y: 0.3,
-					x: 10,
+					y: Math.PI,
 					ease: "power3.inOut",
 					duration: 4,
 				},
@@ -104,10 +94,10 @@ export default function CamControls({
 			);
 
 			tl.to(
-				control.current.target,
+				camera.rotation,
 				{
-					y: -2,
-					duration: 1.5,
+					y: -Math.PI,
+					duration: 3.5,
 					ease: "power2.out",
 				},
 				10.15,
@@ -146,6 +136,7 @@ export default function CamControls({
 			enableZoom={false}
 			enablePan={false}
 			enableRotate={false}
+			enabled={enabled}
 		/>
 	);
 }
